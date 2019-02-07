@@ -1,2 +1,2 @@
-FROM centos:7
-RUN yum install vim
+FROM ubuntu:18.04
+RUN apt -y install vim
