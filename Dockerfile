@@ -9,4 +9,3 @@ RUN python --version
 RUN which pip
 RUN pip --version
 RUN pip install scipy
-
