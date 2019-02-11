@@ -10,5 +10,3 @@ ENV export SINGULARITY_DOCKER_PASSWORD=dG5zcmUyNWFsMWllMnRlaW12ZWFiaGhpazU6NmE5Y
 FROM nvcr.io/hpc/candle:20180326 as candle
 RUN curl -O https://raw.github.com/pypa/virtualenv/master/virtualenv.py
 RUN python virtualenv.py candle
-RUN . candle/bin/activate
-RUN bash /opt/candle_setup.sh
