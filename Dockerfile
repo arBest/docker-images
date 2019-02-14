@@ -28,4 +28,3 @@ apt-get install -y --no-install-recommends \
     tcl-dev \
     python-tk && \
 " > candle_setup.sh
-RUN . candle_setup.sh
