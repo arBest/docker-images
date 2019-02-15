@@ -1,5 +1,5 @@
-FROM centos:6 as ubuntu
-RUN yum update && yum install -y \
+FROM centos:6 as os
+RUN apt-get update && apt-get install -y \
     vim
 ENV export SINGULARITY_DOCKER_USERNAME='$oauthtoken'
 ENV export SINGULARITY_DOCKER_PASSWORD=dG5zcmUyNWFsMWllMnRlaW12ZWFiaGhpazU6NmE5YzlmN2ItMGNiNi00MThlLWEyZmQtM2JlM2MzY2NhZWQy
@@ -7,8 +7,8 @@ FROM nvcr.io/hpc/candle:20180326 as candle
 WORKDIR /opt
 RUN rm candle_setup.sh
 RUN echo $' 
-#!/bin/bash \n\ 
-pip install --upgrade pip \n\
+#!/bin/bash \n 
+pip install --upgrade pip \ \n\
 pip install keras && \ \n\
 pip install -r /opt/pip-dependencies.txt && \ \n\
 export PATH=/usr/bin:$PATH && \ \n\
