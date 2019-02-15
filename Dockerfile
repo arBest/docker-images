@@ -7,7 +7,7 @@ FROM nvcr.io/hpc/candle:20180326 as candle
 WORKDIR /opt
 RUN rm candle_setup.sh
 RUN echo $' 
-#!/bin/bash \n 
+#!/bin/bash \n\ 
 pip install --upgrade pip \ \n\
 pip install keras && \ \n\
 pip install -r /opt/pip-dependencies.txt && \ \n\
