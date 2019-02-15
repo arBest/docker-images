@@ -1,5 +1,5 @@
 FROM centos:6 as os
-RUN apt-get update && apt-get install -y \
+RUN yum update && yum install -y \
     vim
 ENV export SINGULARITY_DOCKER_USERNAME='$oauthtoken'
 ENV export SINGULARITY_DOCKER_PASSWORD=dG5zcmUyNWFsMWllMnRlaW12ZWFiaGhpazU6NmE5YzlmN2ItMGNiNi00MThlLWEyZmQtM2JlM2MzY2NhZWQy
