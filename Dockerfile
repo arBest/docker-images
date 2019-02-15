@@ -6,26 +6,26 @@ ENV export SINGULARITY_DOCKER_PASSWORD=dG5zcmUyNWFsMWllMnRlaW12ZWFiaGhpazU6NmE5Y
 FROM nvcr.io/hpc/candle:20180326 as candle
 WORKDIR /opt
 RUN rm candle_setup.sh
-RUN echo $' 
-#!/bin/bash \n\ 
-pip install --upgrade pip \ \n\
-pip install keras && \ \n\
-pip install -r /opt/pip-dependencies.txt && \ \n\
-export PATH=/usr/bin:$PATH && \ \n\
-export BUILD_DIR=/opt && \ \n\
-cd $BUILD_DIR && \ \n\
-rm -rf swift-t 2> /dev/null && \ \n\
-apt-get update -y && \ \n\
-apt-get install -y --no-install-recommends \ \n\
-        autoconf \ \n\
-    automake \ \n\
-    default-jdk \ \n\
-    git \ \n\
-    ant \ \n\
-    swig \ \n\
-    zsh \ \n\
-    tcl \ \n\
-    tcl-dev \ \n\
+RUN printf ' 
+#!/bin/bash \n 
+pip install --upgrade pip \ \n
+pip install keras && \ \n
+pip install -r /opt/pip-dependencies.txt && \ \n
+export PATH=/usr/bin:$PATH && \ \n
+export BUILD_DIR=/opt && \ \n
+cd $BUILD_DIR && \ \n
+rm -rf swift-t 2> /dev/null && \ \n
+apt-get update -y && \ \n
+apt-get install -y --no-install-recommends \ \n
+        autoconf \ \n
+    automake \ \n
+    default-jdk \ \n
+    git \ \n
+    ant \ \n
+    swig \ \n
+    zsh \ \n
+    tcl \ \n
+    tcl-dev \ \n
     python-tk
 ' > candle_setup.sh
 RUN cat candle_setup.sh
