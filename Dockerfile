@@ -25,6 +25,6 @@ RUN printf " #!/bin/bash
     \nzsh \
     \ntcl \
     \ntcl-dev \
-    \npython-tk
+    \npython-tk\n
 " > candle_setup.sh
 RUN cat candle_setup.sh
