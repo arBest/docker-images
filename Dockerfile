@@ -42,14 +42,13 @@ cp /gpurunscript.sh $TURBINE_PATH/bin && \
 chmod +x $TURBINE_PATH/bin/gpurunscript.sh && \
 export PATH=$BUILD_DIR/swift-t/stc/bin/:$TURBINE_PATH/bin:$PATH && \
 export TURBINE_LAUNCH_OPTIONS=--allow-run-as-root && \
-git clone https://github.com/emews/EQ-R.git && \
-cd $BUILD_DIR/EQ-R/src && \
-./bootstrap && \
-ls -l && \
-cp settings.template.sh settings.sh && \
-sed -i 's@^R_LOCAL_LIB=.*@R_LOCAL_LIB=/usr/local/lib/R/site-library@' ./settings.sh && \
-sed -i 's@^TCL_INCLUDE=.*@TCL_INCLUDE=/usr/include/tcl@' ./settings.sh && \
-sed -i 's@^TCL_LIB=.*@TCL_LIB=/usr/lib@' ./settings.sh && \
-bash -c 'source settings.sh && ./configure --prefix=/opt/EQ-R && make install && make clean' && \
+git clone https://github.com/spack/spack.git && \
+. spack/share/spack/setup-env.sh && \
+git clone https://github.com/emews/spack_emews && \
+cd spack_emews && \
+spack repo add . && \
+spack install eqr && \
 cd /workspace && \
-echo "final setup complete, run /opt/testscript.sh to test"
+ls -l
+
+
