@@ -1,4 +1,4 @@
-FROM ubuntu:18.03 as os
+FROM ubuntu:18.04 as os
 ENV export SINGULARITY_DOCKER_USERNAME='$oauthtoken'
 ENV export SINGULARITY_DOCKER_PASSWORD=dG5zcmUyNWFsMWllMnRlaW12ZWFiaGhpazU6NmE5YzlmN2ItMGNiNi00MThlLWEyZmQtM2JlM2MzY2NhZWQy
 FROM nvcr.io/hpc/candle:20180326 as candle
@@ -46,4 +46,4 @@ cd $BUILD_DIR/EQ-R/src && \\n\
 ./bootstrap && \\n\
 ls && \\n\
 ' > candle_setup.sh
-RUN ./candle_setup.sh
+RUN ls && ./candle_setup.sh
