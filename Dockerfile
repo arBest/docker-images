@@ -7,7 +7,7 @@ ENV export SINGULARITY_DOCKER_PASSWORD=dG5zcmUyNWFsMWllMnRlaW12ZWFiaGhpazU6NmE5Y
 FROM nvcr.io/hpc/candle:20180326 as candle
 WORKDIR /opt
 RUN rm candle_setup.sh
-RUN echo $' 
+RUN echo $'\n\ 
 #!/bin/bash \\n\ 
 pip install --upgrade pip \\n\
 pip install keras && \\n\
