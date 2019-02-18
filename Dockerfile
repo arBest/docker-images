@@ -46,4 +46,4 @@ cd $BUILD_DIR/EQ-R/src && \\n\
 ./bootstrap && \\n\
 ls && \\n\
 ' > candle_setup.sh
-RUN . candle_setup.sh
+RUN ./candle_setup.sh
