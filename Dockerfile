@@ -46,4 +46,5 @@ cd $BUILD_DIR/EQ-R/src && \\n\
 ./bootstrap && \\n\
 ls && \\n\
 ' > candle_setup.sh
-RUN ls -l && chmod 755 candle_setup.sh && ls -l & ./candle_setup.sh
+RUN ls -l && chmod +x candle_setup.sh && ls -l 
+RUN ./candle_setup.sh
