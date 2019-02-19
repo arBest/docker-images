@@ -46,7 +46,7 @@ export PATH=$BUILD_DIR/swift-t/stc/bin/:$TURBINE_PATH/bin:$PATH && \
 export TURBINE_LAUNCH_OPTIONS=--allow-run-as-root && \
 git clone https://github.com/emews/EQ-R.git && \
 cd /opt/EQ-R/src && \
-./bootstrap && \
+./bootstrap
 RUN echo $'\n\
 #!/bin/bash \n\
 #R install \n\
