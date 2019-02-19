@@ -45,7 +45,7 @@ export TURBINE_LAUNCH_OPTIONS=--allow-run-as-root
 RUN wget https://cran.r-project.org/src/base/R-3/R-3.4.3.tar.gz && \
 tar xvf R-3.4.3.tar.gz && \
 cd R-3.4.3 && \
-./configure --prefix=$BUILD_DIR/R-3.4.3 --without-ICU --enable-R-shlib && \
+./configure --prefix=$BUILD_DIR/R-3.4.3 --with-readline=no --with-x=no --without-ICU --enable-R-shlib && \
 make -j 4 && \
 make install
 RUN git clone https://github.com/emews/EQ-R.git && \
