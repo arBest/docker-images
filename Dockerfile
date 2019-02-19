@@ -48,18 +48,19 @@ make -j 4 && \
 make install
 RUN git clone https://github.com/emews/EQ-R.git && \
 cd $BUILD_DIR/EQ-R/src && \
-./bootstrap && \
-echo $'
-#R install local install\n\
-R_HOME=$BUILD_DIR/R-3.4.3\n\
-R_INCLUDE=$R_HOME/lib/R/include\n\
-R_LIB=$R_HOME/lib/R/lib\n\
-R_INSIDE=$R_HOME/lib/R/library/RInside\n\
-RCPP=$R_HOME/lib/R/library/Rcpp\n\
-# System-wide Tcl, such as Ubuntu\n\
-TCL_INCLUDE=/usr/include/tcl8.6\n\
-TCL_LIB=/usr/lib/tcl8.6\n\
-TCL_LIBRARY=tcl8.6\n\
+./bootstrap
+RUN echo $'\n\
+#!/bin/bash \n\
+#R install local install \n\
+R_HOME=$BUILD_DIR/R-3.4.3 \n\
+R_INCLUDE=$R_HOME/lib/R/include \n\
+R_LIB=$R_HOME/lib/R/lib \n\
+R_INSIDE=$R_HOME/lib/R/library/RInside \n\
+RCPP=$R_HOME/lib/R/library/Rcpp \n\
+# System-wide Tcl, such as Ubuntu \n\
+TCL_INCLUDE=/usr/include/tcl8.6 \n\
+TCL_LIB=/usr/lib/tcl8.6 \n\
+TCL_LIBRARY=tcl8.6 \n\
 ' > settings.sh && \
 ls && \
 sed -i 's@^TCL_INCLUDE=.*@TCL_INCLUDE=/usr/include/tcl@' ./settings.sh && \
