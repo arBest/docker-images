@@ -1,7 +1,8 @@
 FROM ubuntu:18.04 as os
 RUN apt-get update && apt-get install -y --no-install-recommends \
 	vim \
-	python-pip
+	python-pip \
+	libbz2-dev
 ENV export SINGULARITY_DOCKER_USERNAME='$oauthtoken'
 ENV export SINGULARITY_DOCKER_PASSWORD=dG5zcmUyNWFsMWllMnRlaW12ZWFiaGhpazU6NmE5YzlmN2ItMGNiNi00MThlLWEyZmQtM2JlM2MzY2NhZWQy
 FROM nvcr.io/hpc/candle:20180326 as candle
@@ -48,6 +49,8 @@ cd R-3.4.3 && \
 ./configure --prefix=$BUILD_DIR/R-3.4.3 --with-readline=no --with-x=no --without-ICU --enable-R-shlib && \
 make -j 4 && \
 make install
+ENV export PATH=$BUILD_DIR/R-3.4.3/bin:$PATH
+ENV export R_HOME=$BUILD_DIR/R-3.4.3/lib64/R
 RUN git clone https://github.com/emews/EQ-R.git && \
 cd $BUILD_DIR/EQ-R/src && \
 ./bootstrap && \
