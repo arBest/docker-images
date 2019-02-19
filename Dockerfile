@@ -42,17 +42,19 @@ cp /gpurunscript.sh $TURBINE_PATH/bin && \
 chmod +x $TURBINE_PATH/bin/gpurunscript.sh && \
 export PATH=$BUILD_DIR/swift-t/stc/bin/:$TURBINE_PATH/bin:$PATH && \
 export TURBINE_LAUNCH_OPTIONS=--allow-run-as-root 
-RUN wget https://cran.r-project.org/src/base/R-3/R-3.4.3.tar.gz && \
+RUN git clone https://github.com/emews/EQ-R.git && \
+cd $BUILD_DIR/EQ-R/src && \
+./bootstrap && \
+wget https://cran.r-project.org/src/base/R-3/R-3.4.3.tar.gz && \
+tar xvf R-3.4.3.tar.gz && \
+cd R-3.4.3 && \
 ./configure --prefix=$BUILD_DIR/R-3.4.3 --without-ICU --enable-R-shlib && \
 make -j 4 && \
 make install
-RUN git clone https://github.com/emews/EQ-R.git && \
-cd $BUILD_DIR/EQ-R/src && \
-./bootstrap
 RUN echo $'\n\
 #!/bin/bash \n\
 #R install local install \n\
-R_HOME=$BUILD_DIR/R-3.4.3 \n\
+R_HOME=/opt/R-3.4.3 \n\
 R_INCLUDE=$R_HOME/lib/R/include \n\
 R_LIB=$R_HOME/lib/R/lib \n\
 R_INSIDE=$R_HOME/lib/R/library/RInside \n\
@@ -61,6 +63,20 @@ RCPP=$R_HOME/lib/R/library/Rcpp \n\
 TCL_INCLUDE=/usr/include/tcl8.6 \n\
 TCL_LIB=/usr/lib/tcl8.6 \n\
 TCL_LIBRARY=tcl8.6 \n\
+CPPFLAGS="" \n\
+CPPFLAGS+="-I$TCL_INCLUDE " \n\
+CPPFLAGS+="-I$R_INCLUDE " \n\
+CPPFLAGS+="-I$RCPP/include " \n\
+CPPFLAGS+="-I$R_INSIDE/include " \n\
+CXXFLAGS=$CPPFLAGS \n\
+LDFLAGS="" \n\
+LDFLAGS+="-L$R_INSIDE/lib -lRInside " \n\
+LDFLAGS+="-L$R_LIB -lR " \n\
+LDFLAGS+="-L$TCL_LIB -l$TCL_LIBRARY " \n\
+LDFLAGS+="-Wl,-rpath -Wl,$TCL_LIB " \n\
+LDFLAGS+="-Wl,-rpath -Wl,$R_LIB " \n\
+LDFLAGS+="-Wl,-rpath -Wl,$R_INSIDE/lib" \n\
+export CPPFLAGS CXXFLAGS LDFLAGS \n\
 ' > settings.sh && \
 ls && \
 sed -i 's@^TCL_INCLUDE=.*@TCL_INCLUDE=/usr/include/tcl@' ./settings.sh && \
