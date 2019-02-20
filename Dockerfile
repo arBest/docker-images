@@ -1,5 +1,4 @@
 FROM ubuntu:18.04 as os
-FROM mugen/ubuntu-build-essential:latest
 RUN apt-get update && apt-get install -y --no-install-recommends \
 	vim \
 	python-pip \
@@ -48,6 +47,7 @@ export TURBINE_LAUNCH_OPTIONS=--allow-run-as-root && \
 git clone https://github.com/emews/EQ-R.git && \
 cd /opt/EQ-R/src && \
 ./bootstrap
+FROM mugen/ubuntu-build-essential:latest
 RUN echo '\n\
 #!/bin/sh \n\
 #R install \n\
