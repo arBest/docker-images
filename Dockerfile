@@ -8,7 +8,7 @@ ENV export SINGULARITY_DOCKER_USERNAME='$oauthtoken'
 ENV export SINGULARITY_DOCKER_PASSWORD=dG5zcmUyNWFsMWllMnRlaW12ZWFiaGhpazU6NmE5YzlmN2ItMGNiNi00MThlLWEyZmQtM2JlM2MzY2NhZWQy
 FROM nvcr.io/hpc/candle:20180326 as candle
 WORKDIR /opt
-RUN rm candle_setup.sh
+RUN rm candle_setup.sh && ls
 RUN pip install --upgrade pip && \
 pip install keras && \
 pip install -r /opt/pip-dependencies.txt && \
@@ -48,7 +48,7 @@ git clone https://github.com/emews/EQ-R.git && \
 cd /opt/EQ-R/src && \
 ./bootstrap
 RUN echo $'\n\
-#!/bin/bash \n\
+#!/bin/sh \n\
 #R install \n\
 R_INCLUDE=/usr/bin/R/include \n\
 R_LIB=/usr/bin/R/lib \n\
@@ -73,8 +73,8 @@ LDFLAGS+="-Wl,-rpath -Wl,$R_LIB " \n\
 LDFLAGS+="-Wl,-rpath -Wl,$R_INSIDE/lib" \n\
 export CPPFLAGS CXXFLAGS LDFLAGS \n\
 ' > settings.sh && \
-ls && \
+cat settings.sh && ls && ls /opt/EQ-R && ls /opt/EQ-R/src && \
 sed -i 's@^TCL_INCLUDE=.*@TCL_INCLUDE=/usr/include/tcl@' ./settings.sh && \
 sed -i 's@^TCL_LIB=.*@TCL_LIB=/usr/lib@' ./settings.sh && \
-bash -c 'source settings.sh && ./configure --prefix=/opt/EQ-R && make install && make clean' && \
+bash -c '. settings.sh && ./configure --prefix=/opt/EQ-R && make install && make clean' && \
 echo 'clean install'
