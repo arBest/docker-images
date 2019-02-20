@@ -3,7 +3,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 	vim \
 	python-pip \
 	r-base \
-	libcurl4-openssl-dev
+	libcurl4-openssl-dev \
+	build-essential
 ENV export SINGULARITY_DOCKER_USERNAME='$oauthtoken'
 ENV export SINGULARITY_DOCKER_PASSWORD=dG5zcmUyNWFsMWllMnRlaW12ZWFiaGhpazU6NmE5YzlmN2ItMGNiNi00MThlLWEyZmQtM2JlM2MzY2NhZWQy
 FROM nvcr.io/hpc/candle:20180326 as candle
@@ -73,7 +74,6 @@ LDFLAGS+="-Wl,-rpath -Wl,$R_LIB " \n\
 LDFLAGS+="-Wl,-rpath -Wl,$R_INSIDE/lib" \n\
 export CPPFLAGS CXXFLAGS LDFLAGS \n\
 ' > settings.sh && \
-cat settings.sh && ls /opt/EQ-R/src && \
 sed -i 's@^TCL_INCLUDE=.*@TCL_INCLUDE=/usr/include/tcl@' ./settings.sh && \
 sed -i 's@^TCL_LIB=.*@TCL_LIB=/usr/lib@' ./settings.sh && \
 bash -c '. settings.sh && /opt/EQ-R/src/configure --prefix=/opt/EQ-R && make install && make clean' && \
