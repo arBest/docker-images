@@ -76,5 +76,6 @@ export CPPFLAGS CXXFLAGS LDFLAGS \n\
 which gcc && which g++ && find /opt/EQ-R/ -name "configure" && ls && \
 sed -i 's@^TCL_INCLUDE=.*@TCL_INCLUDE=/usr/include/tcl@' ./settings.sh && \
 sed -i 's@^TCL_LIB=.*@TCL_LIB=/usr/lib@' ./settings.sh && \
-. /opt/EQ-R/src/settings.sh && ./configure --prefix=/opt/EQ-R && make install && make clean && cat config.log && \
+bash -c './settings.sh && ./configure --prefix=/opt/EQ-R && make install && make clean' && \ 
+cat config.log && \
 echo 'clean install'
