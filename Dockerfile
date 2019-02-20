@@ -1,5 +1,5 @@
 FROM ubuntu:18.04 as os
-FROM mugen/ubuntu-build-essential
+FROM mugen/ubuntu-build-essential:latest
 RUN apt-get update && apt-get install -y --no-install-recommends \
 	vim \
 	python-pip \
