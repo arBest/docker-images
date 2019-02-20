@@ -1,10 +1,10 @@
 FROM ubuntu:18.04 as os
+FROM mugen/ubuntu-build-essential
 RUN apt-get update && apt-get install -y --no-install-recommends \
 	vim \
 	python-pip \
 	r-base \
-	libcurl4-openssl-dev \
-	build-essential
+	libcurl4-openssl-dev 
 ENV export SINGULARITY_DOCKER_USERNAME='$oauthtoken'
 ENV export SINGULARITY_DOCKER_PASSWORD=dG5zcmUyNWFsMWllMnRlaW12ZWFiaGhpazU6NmE5YzlmN2ItMGNiNi00MThlLWEyZmQtM2JlM2MzY2NhZWQy
 FROM nvcr.io/hpc/candle:20180326 as candle
