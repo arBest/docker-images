@@ -47,7 +47,7 @@ export TURBINE_LAUNCH_OPTIONS=--allow-run-as-root && \
 git clone https://github.com/emews/EQ-R.git && \
 cd /opt/EQ-R/src && \
 ./bootstrap
-RUN echo $'\n\
+RUN echo '\n\
 #!/bin/sh \n\
 #R install \n\
 R_INCLUDE=/usr/bin/R/include \n\
@@ -73,8 +73,8 @@ LDFLAGS+="-Wl,-rpath -Wl,$R_LIB " \n\
 LDFLAGS+="-Wl,-rpath -Wl,$R_INSIDE/lib" \n\
 export CPPFLAGS CXXFLAGS LDFLAGS \n\
 ' > settings.sh && \
-cat settings.sh && ls && ls /opt/EQ-R && ls /opt/EQ-R/src && \
+cat settings.sh && ls /opt/EQ-R/src && \
 sed -i 's@^TCL_INCLUDE=.*@TCL_INCLUDE=/usr/include/tcl@' ./settings.sh && \
 sed -i 's@^TCL_LIB=.*@TCL_LIB=/usr/lib@' ./settings.sh && \
-bash -c '. settings.sh && ./configure --prefix=/opt/EQ-R && make install && make clean' && \
+bash -c '. settings.sh && ./opt/EQ-R/src/configure --prefix=/opt/EQ-R && make install && make clean' && \
 echo 'clean install'
