@@ -72,7 +72,10 @@ LDFLAGS+="-Wl,-rpath -Wl,$TCL_LIB " \n\
 LDFLAGS+="-Wl,-rpath -Wl,$R_LIB " \n\
 LDFLAGS+="-Wl,-rpath -Wl,$R_INSIDE/lib" \n\
 export CPPFLAGS CXXFLAGS LDFLAGS \n\
-' > settings.template.sh && \
-cp settings.template.sh settings.sh && \
-sed -i 's@^TCL_INCLUDE=.*@TCL_INCLUDE=/usr/include/tcl@' ./settings.sh && \
-sed -i 's@^TCL_LIB=.*@TCL_LIB=/usr/lib@' ./settings.sh
+' > /opt/EQ-R/src/settings.template.sh && \
+cp /opt/EQ-R/src/settings.template.sh /opt/EQ-R/src/settings.sh && \
+sed -i 's@^TCL_INCLUDE=.*@TCL_INCLUDE=/usr/include/tcl@' ./opt/EQ-R/src/settings.sh && \
+sed -i 's@^TCL_LIB=.*@TCL_LIB=/usr/lib@' ./opt/EQ-R/src/settings.sh
+cd /opt/EQ-R/src && \
+bash -c 'source settings.sh && ./configure --prefix=/opt/EQ-R && make install && make clean' && \ 
+echo 'clean install'
