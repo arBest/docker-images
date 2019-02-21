@@ -44,37 +44,7 @@ cp /gpurunscript.sh $TURBINE_PATH/bin && \
 chmod +x $TURBINE_PATH/bin/gpurunscript.sh && \
 export PATH=$BUILD_DIR/swift-t/stc/bin/:$TURBINE_PATH/bin:$PATH && \
 export TURBINE_LAUNCH_OPTIONS=--allow-run-as-root && \
-git clone https://github.com/emews/EQ-R.git && \
-cd /opt/EQ-R/src && \
-./bootstrap
-RUN echo '\n\
-#!/bin/sh \n\
-#R install \n\
-R_INCLUDE=/usr/bin/R/include \n\
-R_LIB=/usr/bin/R/lib \n\
-R_INSIDE=/usr/bin/R/library/RInside \n\
-RCPP=/usr/bin/R/library/Rcpp \n\
-# System-wide Tcl, such as Ubuntu \n\
-TCL_INCLUDE=/usr/include/tcl8.6 \n\
-TCL_LIB=/usr/lib/tcl8.6 \n\
-TCL_LIBRARY=tcl8.6 \n\
-CPPFLAGS="" \n\
-CPPFLAGS+="-I$TCL_INCLUDE " \n\
-CPPFLAGS+="-I$R_INCLUDE " \n\
-CPPFLAGS+="-I$RCPP/include " \n\
-CPPFLAGS+="-I$R_INSIDE/include " \n\
-CXXFLAGS=$CPPFLAGS \n\
-LDFLAGS="" \n\
-LDFLAGS+="-L$R_INSIDE/lib -lRInside " \n\
-LDFLAGS+="-L$R_LIB -lR " \n\
-LDFLAGS+="-L$TCL_LIB -l$TCL_LIBRARY " \n\
-LDFLAGS+="-Wl,-rpath -Wl,$TCL_LIB " \n\
-LDFLAGS+="-Wl,-rpath -Wl,$R_LIB " \n\
-LDFLAGS+="-Wl,-rpath -Wl,$R_INSIDE/lib" \n\
-export CPPFLAGS CXXFLAGS LDFLAGS \n\
-' > /opt/EQ-R/src/settings.template.sh && \
-cp /opt/EQ-R/src/settings.template.sh /opt/EQ-R/src/settings.sh && \
-cd /opt/EQ-R/src && \
-sed -i 's@^TCL_INCLUDE=.*@TCL_INCLUDE=/usr/include/tcl@' ./settings.sh && \
-sed -i 's@^TCL_LIB=.*@TCL_LIB=/usr/lib@' ./settings.sh && \
-echo 'clean install'
+cd /opt && git clone https://github.com/spack/spack.git && . spack/share/spack/setup-env.sh && \
+cd /opt && git clone https://github.com/emews/spack_emews && spack repo add . && \
+spack install eqr && \
+spack location --install-dir eqr
