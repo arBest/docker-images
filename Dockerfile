@@ -72,7 +72,7 @@ LDFLAGS+="-Wl,-rpath -Wl,$TCL_LIB " \n\
 LDFLAGS+="-Wl,-rpath -Wl,$R_LIB " \n\
 LDFLAGS+="-Wl,-rpath -Wl,$R_INSIDE/lib" \n\
 export CPPFLAGS CXXFLAGS LDFLAGS \n\
-' > settings.sh && \
-which gcc && which g++ && find /opt/EQ-R/ -name "configure" && ls && \
+' > settings.template.sh && \
+cp settings.template.sh settings.sh && \
 sed -i 's@^TCL_INCLUDE=.*@TCL_INCLUDE=/usr/include/tcl@' ./settings.sh && \
 sed -i 's@^TCL_LIB=.*@TCL_LIB=/usr/lib@' ./settings.sh
