@@ -47,5 +47,5 @@ export TURBINE_LAUNCH_OPTIONS=--allow-run-as-root && \
 cd /opt && git clone https://github.com/spack/spack.git && . /opt/spack/share/spack/setup-env.sh && \
 cd /opt && git clone https://github.com/emews/spack_emews && \
 cd /opt/spack_emews && spack repo add . && \
-spack install eqr
+spack install eqr && \
 echo 'clean install with ubuntu 18.04 and gcc 5.4'
