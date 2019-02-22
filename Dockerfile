@@ -44,7 +44,5 @@ cp /gpurunscript.sh $TURBINE_PATH/bin && \
 chmod +x $TURBINE_PATH/bin/gpurunscript.sh && \
 export PATH=$BUILD_DIR/swift-t/stc/bin/:$TURBINE_PATH/bin:$PATH && \
 export TURBINE_LAUNCH_OPTIONS=--allow-run-as-root && \
-cd /opt && git clone https://github.com/spack/spack.git && . spack/share/spack/setup-env.sh && \
-cd /opt && git clone https://github.com/emews/spack_emews && spack repo add . && \
-spack install eqr && \
-spack location --install-dir eqr
+cd /opt && git clone https://github.com/spack/spack.git
+cd /opt && git clone https://github.com/emews/spack_emews
