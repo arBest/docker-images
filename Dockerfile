@@ -1,4 +1,7 @@
 FROM ubuntu:18.04 as os
+RUN groupadd -g 999 appuser && \
+    useradd -r -u 999 -g appuser appuser
+USER appuser
 RUN apt-get update && apt-get install -y --no-install-recommends \
 	vim \
 	python-pip \
